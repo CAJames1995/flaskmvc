@@ -4,7 +4,7 @@
 ![Tests](https://github.com/CAJames1995/flaskmvc/actions/workflows/dev.yml/badge.svg)
 
 # Flask MVC Template
-A template for flask applications structured in the Model View Controller pattern [Demo](https://webbuddies-flaskmvc.herokuapp.com/)
+A template for flask applications structured in the Model View Controller pattern [Demo](https://dcit-flaskmvc.herokuapp.com/)
 
 
 # Dependencies
