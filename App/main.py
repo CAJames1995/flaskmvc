@@ -64,6 +64,10 @@ def create_app(config={}):
 
 app = create_app()
 
+@app.route('/')
+def index():
+   return render_template('index.html')
+
 @app.route('/api/users', methods = ['GET'])
 def getAllUsers():
     u = User.query.all()
@@ -76,7 +80,7 @@ def getAllUsers():
 def getLoginPage():
     if current_user.is_authenticated:
         flash('Already Logged In')
-        return redirect(url_for(''))
+        return redirect(url_for('conduct'))
     form = LogIn()
     return render_template('templates/login.html',form = form)
 
@@ -88,7 +92,7 @@ def loginAction():
     if user is not None:  
         flash('Login successful')
         login_user(user,True)
-        return redirect(url_for(''))
+        return redirect(url_for('conduct'))
     
     flash('Invalid credentials')
     return redirect(url_for('loginAction'))
@@ -98,7 +102,7 @@ def loginAction():
 def getSignUpPage():
     if current_user.is_authenticated:
         flash('You cannot create an account while logged in.')
-        return redirect(url_for(''))
+        return redirect(url_for('conduct'))
     form = SignUp()
     return render_template('signup.html',form = form)
 
@@ -119,4 +123,9 @@ def signUpAction():
 def logoutActions():
     logout_user()
     flash('Logged Out')
-    return redirect(url_for('api_views.get_api_docs'))
+    return redirect(url_for('index'))
+
+# WIP: to be built:
+@app.route('/conduct') 
+def conduct():
+   return render_template('conduct.html')
