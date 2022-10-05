@@ -11,7 +11,8 @@ from datetime import timedelta
 from App.database import create_db
 
 from App.controllers import (
-    setup_jwt
+    setup_jwt,
+    create_user
 )
 
 from App.views import (
@@ -60,3 +61,62 @@ def create_app(config={}):
     setup_jwt(app)
     app.app_context().push()
     return app
+
+app = create_app()
+
+@app.route('/api/users', methods = ['GET'])
+def getAllUsers():
+    u = User.query.all()
+    if u is None:
+        return []
+    uList = [us.toDict() for us in u]
+    return jsonify(uList)
+
+@app.route('/login')
+def getLoginPage():
+    if current_user.is_authenticated:
+        flash('Already Logged In')
+        return redirect(url_for(''))
+    form = LogIn()
+    return render_template('templates/login.html',form = form)
+
+@app.route('/login', methods = {'POST'})
+def loginAction():
+    form = LogIn()
+    data = request.form
+    user = validate_User(data['username'], data['password'])
+    if user is not None:  
+        flash('Login successful')
+        login_user(user,True)
+        return redirect(url_for(''))
+    
+    flash('Invalid credentials')
+    return redirect(url_for('loginAction'))
+
+
+@app.route('/signup')
+def getSignUpPage():
+    if current_user.is_authenticated:
+        flash('You cannot create an account while logged in.')
+        return redirect(url_for(''))
+    form = SignUp()
+    return render_template('signup.html',form = form)
+
+@app.route('/signup', methods=['POST'])
+def signUpAction():
+    form = SignUp()
+    data = request.form
+    message = create_user(data['username'], data['password'])
+    if message == "Error":
+        flash('Error. Account not created')
+        return redirect(url_for('getSignUpPage'))
+    else:
+        flash('Account Created Successfully')
+    return redirect(url_for('loginAction'))
+
+
+@app.route('/logout')
+def logoutActions():
+    logout_user()
+    flash('Logged Out')
+    return redirect(url_for('api_views.get_api_docs'))

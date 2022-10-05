@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+{% block title %}Student Conduct{% endblock %}
+{% block page %}Sign Up{% endblock %}
+
+{{ super() }}
+
+{% block content %}
+<body>
+  <div class="row">
+    <div class="row center-align">
+      <form id="myForm" class="col s12 m8 offset-m2" method="POST" action="/signup">
+          {{ form.csrf_token }}
+
+          {% if form.csrf_token.error %}
+          <div class="warning">You have submitted an invalid CSRF token</div>
+           {% endif %}
+          <div class="input-field col s12 m8 offset-m2"> 
+            {{ form.username(size=20, class="validate") }}
+            {{ form.username.label }}
+          </div>
+
+          <div class="input-field col s12 m8 offset-m2">
+            {{ form.email(size=50, class="validate") }}
+            {{ form.email.label }}
+          </div>
+
+          <div class="input-field col s12 m8 offset-m2">
+            {{ form.password(size=20, class="validate") }}
+            {{ form.password.label }}
+          </div>
+
+          <div class="input-field col s12 m8 offset-m2">
+            {{ form.confirm(size=20, class="validate") }}
+            {{ form.confirm.label }}
+          </div>
+
+          <div class="input-field col s12 m8 offset-m2">
+            {{form.submit (class="btn white-text #5e35b1 deep-purple darken-1")}}
+          </div> 
+      </form>
+     
+    </div>
+    <div class="center-align col s12 m8 offset-m2">
+    <a href = "/" class="waves-effect waves-light btn white-text #5e35b1 deep-purple darken-1">Return</a>
+</div>
+</div>
+</body>
+
+{% endblock %}
