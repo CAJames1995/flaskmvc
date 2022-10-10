@@ -32,14 +32,16 @@ from App.models import (
 
 from App.views import (
     user_views,
-    index_views
+    index_views,
+    signup_views
 )
 
 # New views must be imported and added to this list
 
 views = [
     user_views,
-    index_views
+    index_views,
+    signup_views
 ]
 
 def add_views(app, views):
@@ -80,7 +82,7 @@ def create_app(config={}):
     app.app_context().push()
     return app
 
-app = create_app()
+app = Flask(__name__)
 
 @app.route('/')
 def index():
