@@ -18,9 +18,8 @@ from App.controllers import (
 
 from App.models import (
     login,
-    User,
-    SignUp,
-    LogIn
+    user,
+    SignUp
 )
 
 from App.views import (
