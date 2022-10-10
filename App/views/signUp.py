@@ -13,11 +13,5 @@ signup_views = Blueprint('signup_views', __name__, template_folder='../templates
 @signup_views.route('/signup', methods = ['GET'])
 def init_signup():
   contentData = SignUp()
-  test = {
-    "currentScore": 0,
-    "correctWords": 0,
-    "incorrectWords":0,
-    "currentIndex": 3
-  }
   return render_template('/signup.html',test = test)
 

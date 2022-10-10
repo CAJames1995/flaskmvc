@@ -7,9 +7,17 @@ from werkzeug.utils import secure_filename
 from werkzeug.datastructures import  FileStorage
 from datetime import timedelta
 from App.controllers.auth import login_user, logout_user
+from App.controllers.user import validate_User
+
+login_manager = LoginManager()
+
+login_manager = LoginManager()
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(user_id)
 
 
-from App.database import create_db
+from App.database import create_db, get_migrate
 
 from App.controllers import (
     setup_jwt,
@@ -86,13 +94,17 @@ def getAllUsers():
     uList = [us.toDict() for us in u]
     return jsonify(uList)
 
+@app.route('/tester')
+def tester():
+    return 'girl wtf is u talking about'
+
 @app.route('/login')
 def getLoginPage():
     if current_user.is_authenticated:
         flash('Already Logged In')
         return redirect(url_for('conduct'))
     form = LogIn()
-    return render_template('templates/login.html',form = form)
+    return render_template('login.html',form = form)
 
 @app.route('/login', methods = {'POST'})
 def loginAction():
@@ -106,7 +118,6 @@ def loginAction():
     
     flash('Invalid credentials')
     return redirect(url_for('loginAction'))
-
 
 @app.route('/signup')
 def getSignUpPage():
@@ -139,3 +150,7 @@ def logoutActions():
 @app.route('/conduct') 
 def conduct():
    return render_template('conduct.html')
+
+   
+migrate = get_migrate(app)
+
