@@ -94,9 +94,9 @@ def getAllUsers():
     uList = [us.toDict() for us in u]
     return jsonify(uList)
 
-@app.route('/tester')
-def tester():
-    return 'girl wtf is u talking about'
+# @app.route('/tester')
+# def tester():
+#     return 'ugh'
 
 @app.route('/login')
 def getLoginPage():
