@@ -11,6 +11,3 @@ def login_page():
     return render_template('login.html')
 
 
-@index_views.route('/conduct', methods=['GET'])
-def conduct_page():
-    return render_template('conduct.html')

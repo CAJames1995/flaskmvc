@@ -33,8 +33,8 @@ from App.models import (
 from App.views import (
     user_views,
     index_views,
-    signup_views
-    # conduct_views
+    signup_views,
+    conduct_views
 )
 
 # New views must be imported and added to this list
@@ -42,8 +42,8 @@ from App.views import (
 views = [
     user_views,
     index_views,
-    signup_views
-    # conduct_views
+    signup_views,
+    conduct_views
 ]
 
 def add_views(app, views):
@@ -152,6 +152,7 @@ def logoutActions():
 def conduct():
    return render_template('conduct.html')
 
-   
+
+
 migrate = get_migrate(app)
 
