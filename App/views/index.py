@@ -9,3 +9,4 @@ def index_page():
 @index_views.route('/login')
 def login_page():
     return render_template('login.html')
+

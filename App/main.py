@@ -33,7 +33,8 @@ from App.models import (
 from App.views import (
     user_views,
     index_views,
-    signup_views
+    signup_views,
+    conduct_views
 )
 
 # New views must be imported and added to this list
@@ -41,7 +42,8 @@ from App.views import (
 views = [
     user_views,
     index_views,
-    signup_views
+    signup_views,
+    conduct_views
 ]
 
 def add_views(app, views):
@@ -96,9 +98,6 @@ def getAllUsers():
     uList = [us.toDict() for us in u]
     return jsonify(uList)
 
-# @app.route('/tester')
-# def tester():
-#     return 'ugh'
 
 @app.route('/login')
 def getLoginPage():
@@ -149,7 +148,7 @@ def logoutActions():
     return redirect(url_for('index'))
 
 # WIP: to be built:
-@app.route('/conduct') 
+@app.route('/conduct', methods=['GET']) 
 def conduct():
    return render_template('conduct.html')
 
