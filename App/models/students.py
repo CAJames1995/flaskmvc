@@ -6,7 +6,7 @@ class Student(db.Model):
   fName = db.Column(db.String, nullable=False)
   lName = db.Column(db.String, nullable=False)
   faculty = db.Column(db.String, nullable=False)
-  year = db.Column(db.Integer(4), nullable=False)
+  year = db.Column(db.Integer, nullable=False)
   kpoints = db.Column(db.Integer, nullable=False)
   reviews = db.relationship('Review', backref='Student')
 
