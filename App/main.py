@@ -27,7 +27,9 @@ from App.controllers import (
 from App.models import (
     login,
     user,
-    SignUp
+    SignUp,
+    students,
+    conductReviews
 )
 
 from App.views import (
